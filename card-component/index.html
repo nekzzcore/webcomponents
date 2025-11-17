@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Карточки с контентом</title>
+    <script src="card-component.js"></script>
+    <style>
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .controls {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-btn { background: #28a745; color: white; }
+        .custom-btn { background: #007bff; color: white; }
+        .clear-btn { background: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button class="add-btn" onclick="cardManager.addCard()"> Добавить карточку</button>
+        <button class="custom-btn" onclick="cardManager.addCustomCard()"> Создать свою</button>
+        <button class="clear-btn" onclick="cardManager.clearAllCards()"> Удалить все</button>
+    </div>
+
+    <!-- Примеры карточек -->
+    <card-component>
+        <span slot="header">Моя карточка 1</span>
+        <span slot="content">Текст карточки 1</span>
+    </card-component>
+
+    <card-component>
+        <span slot="header">Карточка с фото</span>
+        <div slot="content">
+            <p>Текст описания</p>
+            <img src="https://via.placeholder.com/250" width="100%">
+        </div>
+    </card-component>
+
+    <card-component>
+        <h2 slot="header">Заголовок h2</h2>
+        <div slot="content">
+            <p>Параграф 1</p>
+            <p>Параграф 2</p>
+            <button onclick="alert('Клик!')">Кнопка</button>
+        </div>
+    </card-component>
+</body>
+</html>
