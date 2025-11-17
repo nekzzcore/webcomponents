@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Финансовый калькулятор</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+    .card { background: white; padding: 20px; border-radius: 10px; width: 300px; }
+    input, button { width: 100%; padding: 8px; margin: 6px 0; border-radius: 6px; border: 1px solid #ccc; }
+    button { background: #1766d1; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Финансовый калькулятор</h2>
+    <label>Сумма кредита (₽)</label>
+    <input type="number" id="amount" placeholder="50000">
+
+    <label>Годовая ставка (%)</label>
+    <input type="number" id="rate" placeholder="10">
+
+    <label>Срок (лет)</label>
+    <input type="number" id="years" placeholder="5">
+
+    <button id="calcBtn">Рассчитать</button>
+  </div>
+
+  <script>
+    document.getElementById('calcBtn').addEventListener('click', function() {
+      const P = parseFloat(document.getElementById('amount').value);
+      const annualRate = parseFloat(document.getElementById('rate').value);
+      const years = parseInt(document.getElementById('years').value, 10);
+
+      if(isNaN(P) || isNaN(annualRate) || isNaN(years)) {
+        console.log("Введите корректные данные!");
+        return;
+      }
+
+      const n = years * 12;
+      const r = annualRate / 100 / 12;
+      const monthlyPayment = P * r / (1 - Math.pow(1 + r, -n));
+      const totalPayment = monthlyPayment * n;
+      const totalInterest = totalPayment - P;
+
+      console.log("=== Результат расчёта кредита ===");
+      console.log("Сумма кредита:", P.toLocaleString('ru-RU'), "₽");
+      console.log("Годовая ставка:", annualRate, "%");
+      console.log("Срок:", years, "лет");
+      console.log("Ежемесячный платёж:", monthlyPayment.toFixed(2), "₽");
+      console.log("Всего выплачено:", totalPayment.toFixed(2), "₽");
+      console.log("Переплата (проценты):", totalInterest.toFixed(2), "₽");
+    });
+  </script>
+</body>
+</html>
