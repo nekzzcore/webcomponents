@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор расходов</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { padding: 20px; background: #f5f5f5; }
+        expense-calculator { display: block; max-width: 500px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .input-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        button { padding: 10px 15px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #45a049; }
+        .expense-list { margin-bottom: 20px; }
+        .expense-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; }
+        .expense-item:last-child { border-bottom: none; }
+        .delete-btn { color: #ff4444; cursor: pointer; }
+        .total { font-weight: bold; text-align: right; padding-top: 10px; border-top: 2px solid #4CAF50; }
+    </style>
+</head>
+<body>
+    <expense-calculator></expense-calculator>
+
+    <script>
+        class ExpenseCalculator extends HTMLElement {
+            constructor() {
+                super();
+                this.expenses = [];
+                this.attachShadow({mode: 'open'});
+                this.render();
+            }
+
+            connectedCallback() {
+                this.shadowRoot.addEventListener('click', e => {
+                    if (e.target.classList.contains('add-btn')) this.addExpense();
+                    if (e.target.classList.contains('delete-btn')) this.deleteExpense(e.target.dataset.id);
+                });
+            }
+
+            addExpense() {
+                const name = this.shadowRoot.querySelector('#name').value.trim();
+                const amount = parseFloat(this.shadowRoot.querySelector('#amount').value);
+                
+                if (name && amount > 0) {
+                    this.expenses.push({id: Date.now(), name, amount});
+                    this.render();
+                    this.shadowRoot.querySelector('#name').value = '';
+                    this.shadowRoot.querySelector('#amount').value = '';
+                }
+            }
+
+            deleteExpense(id) {
+                this.expenses = this.expenses.filter(exp => exp.id != id);
+                this.render();
+            }
+
+            getTotal() {
+                return this.expenses.reduce((sum, exp) => sum + exp.amount, 0);
+            }
+
+            render() {
+                this.shadowRoot.innerHTML = `
+                    <div class="input-group">
+                        <input type="text" id="name" placeholder="Название расхода">
+                        <input type="number" id="amount" placeholder="Сумма" min="0" step="0.01">
+                        <button class="add-btn">Добавить</button>
+                    </div>
+                    <div class="expense-list">
+                        ${this.expenses.map(exp => `
+                            <div class="expense-item">
+                                <span>${exp.name}</span>
+                                <span>${exp.amount.toFixed(2)} руб.</span>
+                                <span class="delete-btn" data-id="${exp.id}">✕</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="total">Общая сумма: ${this.getTotal().toFixed(2)} руб.</div>
+                `;
+            }
+        }
+
+        customElements.define('expense-calculator', ExpenseCalculator);
+    </script>
+</body>
+</html>
