@@ -1,0 +1,352 @@
+/* Базовые стили компонента */
+.expense-calculator {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.calculator-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.calculator-header h2 {
+    color: #2c3e50;
+    margin: 0 0 10px 0;
+    font-size: 28px;
+}
+
+.subtitle {
+    color: #7f8c8d;
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Форма ввода */
+.expense-form {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    border: 2px solid #e9ecef;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-input.focused {
+    border-color: #3498db;
+}
+
+.amount-input-wrapper {
+    position: relative;
+}
+
+.currency {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7f8c8d;
+    font-weight: bold;
+}
+
+/* Кнопки */
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-icon {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn-delete {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-delete:hover {
+    background: #ffebee;
+    color: #c0392b;
+}
+
+.delete-icon {
+    fill: currentColor;
+}
+
+/* Карточка с итогами */
+.summary-card {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-expenses, .expense-count {
+    text-align: center;
+}
+
+.total-label, .count-label {
+    display: block;
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.total-amount {
+    font-size: 32px;
+    font-weight: bold;
+    display: block;
+}
+
+.count-number {
+    font-size: 28px;
+    font-weight: bold;
+    display: block;
+}
+
+/* Секция списка расходов */
+.expenses-section {
+    margin-top: 20px;
+}
+
+.section-title {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+/* Список расходов */
+.expenses-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: white;
+    border: 2px solid #f1f2f6;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    animation: slideIn 0.3s ease;
+}
+
+.expense-item:hover {
+    border-color: #3498db;
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.expense-info {
+    flex: 1;
+}
+
+.expense-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.expense-date {
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+.expense-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.expense-amount {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 18px;
+}
+
+/* Состояние пустого списка */
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: #7f8c8d;
+}
+
+.empty-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.empty-hint {
+    font-size: 14px !important;
+    opacity: 0.7;
+}
+
+/* Уведомления */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 500;
+    z-index: 1000;
+    animation: slideUp 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.notification-success {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+}
+
+.notification-error {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+.notification-info {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+/* Скроллбар */
+.expenses-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.expenses-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.expenses-list::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 4px;
+}
+
+.expenses-list::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .expense-calculator {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .summary-card {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .expense-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .expense-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .notification {
+        left: 20px;
+        right: 20px;
+        text-align: center;
+    }
+}
